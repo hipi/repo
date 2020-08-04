@@ -182,13 +182,13 @@ Promise.mySettled = function (arr) {
                         "value": data
                     }
                 }, err => {
-                    res[i] ={
+                    res[i] = {
                         "status": 'rejected',
                         "reason": err
                     }
                 })
             } else {
-                res[i] ={
+                res[i] = {
                     "status": 'fulfiled',
                     "value": arr[i]
                 }
@@ -200,14 +200,14 @@ Promise.mySettled = function (arr) {
 
 
 // 实现reduce
-Array.prototype.myreduce = function(fn, initVal) {
+Array.prototype.myreduce = function (fn, initVal) {
     let result = initVal,
         i = 0;
-    if(typeof initVal  === 'undefined'){
+    if (typeof initVal === 'undefined') {
         result = this[i]
         i++;
     }
-    while( i < this.length ){
+    while (i < this.length) {
         result = fn(result, this[i])
     }
     return result
@@ -215,13 +215,13 @@ Array.prototype.myreduce = function(fn, initVal) {
 
 //实现Object.create方法
 function create(proto) {
-    function Fn() {};
+    function Fn() { };
     Fn.prototype = proto;
     Fn.prototype.constructor = Fn;
     return new Fn();
 }
 let demo = {
-    c : '123'
+    c: '123'
 }
 let cc = Object.create(demo)
 
@@ -271,27 +271,27 @@ function demo(x1, x2) {
 }
 demo.apply(cc, [2, 3])
 demo.myapply(cc, [2, 3])
-demo.call(cc,33,44)
-demo.mycall(cc,33,44)
+demo.call(cc, 33, 44)
+demo.mycall(cc, 33, 44)
 
 
 // 实现bind
-Function.prototype.mybind = function(context, ...args){
+Function.prototype.mybind = function (context, ...args) {
     return (...newArgs) => {
-        return this.call(context,...args, ...newArgs)
+        return this.call(context, ...args, ...newArgs)
     }
 }
 
 // 测试用例
 let cc = {
-    name : 'TianTian'
+    name: 'TianTian'
 }
-function say(something,other){
+function say(something, other) {
     console.log(`I want to tell ${this.name} ${something}`);
-    console.log('This is some'+other)
+    console.log('This is some' + other)
 }
-let tmp = say.mybind(cc,'happy','you are kute')
-let tmp1 = say.bind(cc,'happy','you are kute')
+let tmp = say.mybind(cc, 'happy', 'you are kute')
+let tmp1 = say.bind(cc, 'happy', 'you are kute')
 tmp()
 tmp1()
 
@@ -299,30 +299,30 @@ tmp1()
 // 数组扁平化 不传递参数
 let flatDeep = (arr) => {
     return arr.reduce((res, cur) => {
-        if(Array.isArray(cur)){
+        if (Array.isArray(cur)) {
             return [...res, ...flatDep(cur)]
-        }else{
+        } else {
             return [...res, cur]
         }
-    },[])
+    }, [])
 }
 
 // 可以传递参数
 function flatDeep(arr, d = 1) {
     return d > 0 ? arr.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatDeep(val, d - 1) : val),
-    []) :
+        []) :
         arr.slice();
 };
 
 
 // 数组去重的几种方式
 
-var array = [1, 1, '1', '1', null, null, 
-                undefined, undefined, 
-                new String('1'), new String('1'), 
-                /a/, /a/,
-                NaN, NaN
-            ];
+var array = [1, 1, '1', '1', null, null,
+    undefined, undefined,
+    new String('1'), new String('1'),
+    /a/, /a/,
+    NaN, NaN
+];
 
 // 使用Set
 let unique_1 = arr => [...new Set(arr)];
@@ -363,11 +363,11 @@ let unique_5 = arr => arr.reduce((pre, cur) => pre.includes(cur) ? pre : [...pre
 
 function inheritPrototype(subType, superType) {
     // 创建对象，创建父类原型的一个副本
-    var prototype = Object.create(superType.prototype); 
+    var prototype = Object.create(superType.prototype);
     // 增强对象，弥补因重写原型而失去的默认的constructor 属性
-    prototype.constructor = subType; 
+    prototype.constructor = subType;
     // 指定对象，将新创建的对象赋值给子类的原型
-    subType.prototype = prototype; 
+    subType.prototype = prototype;
 }
 
 // 测试用例

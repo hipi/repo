@@ -5,7 +5,7 @@ function dragandDrop(id, clientX, clientY, distance) {
     k = 0,
     interval;
   iME(elem, "mousedown", 0, 0, clientX, clientY);
-  interval = setInterval(function() {
+  interval = setInterval(function () {
     k++;
     iter(k);
     if (k === distance) {
@@ -38,7 +38,7 @@ function dragandDrop(id, clientX, clientY, distance) {
     obj.dispatchEvent(mousemove);
   }
 }
-window.setTimeout(function() {
+window.setTimeout(function () {
   obj = document.getElementById("nc_1_n1z");
   obj.target = "_self";
   var _owh = obj.getBoundingClientRect();
